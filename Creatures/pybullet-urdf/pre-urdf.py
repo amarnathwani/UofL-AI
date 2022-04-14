@@ -1,9 +1,9 @@
 import pybullet as p 
-import pybullet_data
+import pybullet_data as pd
 import time
 
 p.connect(p.GUI)
-p.setAdditionalSearchPath(pybullet_data.getDataPath())
+p.setAdditionalSearchPath(pd.getDataPath())
 
 p.createCollisionShape(p.GEOM_PLANE) # the floor
 p.createMultiBody(0, 0)
