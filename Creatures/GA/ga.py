@@ -3,6 +3,7 @@ import pybullet_data as pd
 import time
 
 p.connect(p.GUI)
+p.setPhysicsEngineParameter(enableFileCaching=0)
 
 plane_shape = p.createCollisionShape(p.GEOM_PLANE)
 floor = p.createMultiBody(plane_shape, plane_shape)

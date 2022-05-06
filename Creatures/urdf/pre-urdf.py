@@ -11,6 +11,9 @@ p.createMultiBody(0, 0)
 ur_file = 'r2d2.urdf'
 creatureId = p.loadURDF(ur_file)
 
+samurai = 'samurai.urdf'
+sam = p.loadURDF(samurai)
+
 p.setGravity(0, 0, -10)
 p.setRealTimeSimulation(1)
 
