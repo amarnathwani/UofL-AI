@@ -16,7 +16,6 @@ class Motor:
         self.amp = control_amp
         self.freq = control_freq
         self.phase = 0
-    
 
     def get_output(self):
         self.phase = (self.phase + self.freq) % (np.pi * 2)
@@ -59,6 +58,7 @@ class Creature:
         return self.exp_links
 
     def to_xml(self):
+        # assert(self.exp_links != None), "creature: call get_exp_links before to_xml"
         self.get_expanded_links()
         domimpl = getDOMImplementation()
         adom = domimpl.createDocument(None, "start", None)
@@ -71,10 +71,11 @@ class Creature:
                 first = False
                 continue
             robot_tag.appendChild(link.to_joint_element(adom))
-        robot_tag.setAttribute("name", "pepe") #  choose a name!
+        robot_tag.setAttribute("name", "rob") #  choose a name!
         return '<?xml version="1.0"?>' + robot_tag.toprettyxml()
 
     def get_motors(self):
+        # assert(self.exp_links != None), "creature: call get_exp_links before get_motors"
         self.get_expanded_links()
         if self.motors == None:
             motors = []
@@ -83,4 +84,4 @@ class Creature:
                 m = Motor(l.control_waveform, l.control_amp,  l.control_freq)
                 motors.append(m)
             self.motors = motors 
-        return self.motors 
+        return self.motors

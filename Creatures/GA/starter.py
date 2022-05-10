@@ -14,8 +14,8 @@ floor = p.createMultiBody(plane_shape, plane_shape)
 ur_file = '/test.urdf'
 rob = p.loadURDF(os.path.abspath('') + "/GA" + ur_file)
 
-for i in range(p.getNumJoints(rob)):
-	p.setJointMotorControl2(rob, i, controlMode=p.VELOCITY_CONTROL, targetVelocity=1)
+for jid in range(p.getNumJoints(rob)):
+	p.setJointMotorControl2(rob, jid, controlMode=p.VELOCITY_CONTROL, targetVelocity=1)
 
 p.setGravity(0, 0, -10)
 p.setRealTimeSimulation(1)

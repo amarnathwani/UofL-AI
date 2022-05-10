@@ -1,12 +1,16 @@
+from importlib.resources import path
+import os
+import pybullet as p
+import pybullet_data as pd
+import time
 import genome
 import creature
-import pybullet as p
-import time 
 import random
-## ... usual starter code to create a sim and floor
+
 p.connect(p.GUI)
 p.setPhysicsEngineParameter(enableFileCaching=0)
 p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
+
 plane_shape = p.createCollisionShape(p.GEOM_PLANE)
 floor = p.createMultiBody(plane_shape, plane_shape)
 p.setGravity(0, 0, -10)
@@ -14,13 +18,20 @@ p.setRealTimeSimulation(1)
 
 # generate a random creature
 cr = creature.Creature(gene_count=3)
+
 # save it to XML
 with open('test.urdf', 'w') as f:
+    # cr.get_expanded_links()
     f.write(cr.to_xml())
+
 # load it into the sim
-rob1 = p.loadURDF('test.urdf')
+ur_file = '/test.urdf'
+rob1 = p.loadURDF(os.path.abspath('') + ur_file)
+
 # iterate 
 while True:
+    p.stepSimulation()
+
     motors = cr.get_motors()
     assert len(motors) == p.getNumJoints(rob1), "Something went wrong"
     for jid in range(p.getNumJoints(rob1)):
@@ -30,4 +41,5 @@ while True:
                         jid,  
                         controlMode=mode, 
                         targetVelocity=vel)
-    time.sleep(0.5)
+                        
+    time.sleep(1.0/240)

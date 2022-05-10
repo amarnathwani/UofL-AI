@@ -1,0 +1,110 @@
+<?xml version="1.0"?><robot name="rob">
+	<link name="0">
+		<visual>
+			<geometry>
+				<cylinder length="0.758445517269448" radius="0.6616692198853417"/>
+			</geometry>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.758445517269448" radius="0.6616692198853417"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="1.0431724909473667"/>
+			<inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0" ixz="0" iyx="0"/>
+		</inertial>
+	</link>
+	<link name="11">
+		<visual>
+			<geometry>
+				<cylinder length="0.32871619204638414" radius="0.47706449343831736"/>
+			</geometry>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.32871619204638414" radius="0.47706449343831736"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.23503100566572174"/>
+			<inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0" ixz="0" iyx="0"/>
+		</inertial>
+	</link>
+	<link name="12">
+		<visual>
+			<geometry>
+				<cylinder length="0.32871619204638414" radius="0.47706449343831736"/>
+			</geometry>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.32871619204638414" radius="0.47706449343831736"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.23503100566572174"/>
+			<inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0" ixz="0" iyx="0"/>
+		</inertial>
+	</link>
+	<link name="13">
+		<visual>
+			<geometry>
+				<cylinder length="0.32871619204638414" radius="0.47706449343831736"/>
+			</geometry>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.32871619204638414" radius="0.47706449343831736"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.23503100566572174"/>
+			<inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0" ixz="0" iyx="0"/>
+		</inertial>
+	</link>
+	<link name="24">
+		<visual>
+			<geometry>
+				<cylinder length="0.36517636045624" radius="0.03869344615294423"/>
+			</geometry>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.36517636045624" radius="0.03869344615294423"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.001717621036961022"/>
+			<inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0" ixz="0" iyx="0"/>
+		</inertial>
+	</link>
+	<joint name="11_to_0" type="revolute">
+		<parent link="0"/>
+		<child link="11"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="1" upper="-3.1415" lower="3.1415" velocity="1"/>
+		<origin rpy="2.151923557371749 4.731704154840095 3.2191729209334317" xyz="0.5790564755296627 0.4578592116065312 0.6232445698945813"/>
+	</joint>
+	<joint name="12_to_0" type="revolute">
+		<parent link="0"/>
+		<child link="12"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="1" upper="-3.1415" lower="3.1415" velocity="1"/>
+		<origin rpy="3.227885336057623 4.731704154840095 3.2191729209334317" xyz="0.5790564755296627 0.4578592116065312 0.6232445698945813"/>
+	</joint>
+	<joint name="13_to_0" type="revolute">
+		<parent link="0"/>
+		<child link="13"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="1" upper="-3.1415" lower="3.1415" velocity="1"/>
+		<origin rpy="4.303847114743498 4.731704154840095 3.2191729209334317" xyz="0.5790564755296627 0.4578592116065312 0.6232445698945813"/>
+	</joint>
+	<joint name="24_to_0" type="revolute">
+		<parent link="0"/>
+		<child link="24"/>
+		<axis xyz="1 0 0"/>
+		<limit effort="1" upper="-3.1415" lower="3.1415" velocity="1"/>
+		<origin rpy="10.510552173729401 2.4501656616869476 4.0557251258886895" xyz="0.7571858295084349 0.7047426672682624 0.3740678247259577"/>
+	</joint>
+</robot>

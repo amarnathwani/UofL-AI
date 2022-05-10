@@ -30,7 +30,6 @@ class TestCreature(unittest.TestCase):
         # p.connect(p.DIRECT)
         # cid = p.loadURDF('test.urdf')
         self.assertIsNotNone(xml_str)
-
       
     def testMotor(self):
         m = creature.Motor(0.1, 0.5, 0.5)
@@ -45,5 +44,11 @@ class TestCreature(unittest.TestCase):
         m.get_output()
         m.get_output()     
         self.assertGreater(m.get_output(), 0)
+
+    def testCMot(self):
+        c = creature.Creature(gene_count=4)
+        ls = c.get_expanded_links()
+        ms = c.get_motors()
+        self.assertEqual(len(ls) - 1, len(ms))
 
 unittest.main()
