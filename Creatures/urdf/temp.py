@@ -1,6 +1,5 @@
 from importlib.resources import path
 import os
-import pwd
 import pybullet as p
 import pybullet_data as pd
 import time
