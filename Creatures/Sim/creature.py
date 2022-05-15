@@ -16,6 +16,7 @@ class Motor:
         self.amp = control_amp
         self.freq = control_freq
         self.phase = 0
+    
 
     def get_output(self):
         self.phase = (self.phase + self.freq) % (np.pi * 2)
@@ -37,8 +38,6 @@ class Creature:
         self.flat_links = None
         self.exp_links = None
         self.motors = None
-        self.get_flat_links()
-        self.get_expanded_links()
         self.start_position = None
         self.last_position = None
 
@@ -62,7 +61,6 @@ class Creature:
         return self.exp_links
 
     def to_xml(self):
-        # assert(self.exp_links != None), "creature: call get_exp_links before to_xml"
         self.get_expanded_links()
         domimpl = getDOMImplementation()
         adom = domimpl.createDocument(None, "start", None)
@@ -75,11 +73,10 @@ class Creature:
                 first = False
                 continue
             robot_tag.appendChild(link.to_joint_element(adom))
-        robot_tag.setAttribute("name", "rob") #  choose a name!
+        robot_tag.setAttribute("name", "pepe") #  choose a name!
         return '<?xml version="1.0"?>' + robot_tag.toprettyxml()
 
     def get_motors(self):
-        # assert(self.exp_links != None), "creature: call get_exp_links before get_motors"
         self.get_expanded_links()
         if self.motors == None:
             motors = []
@@ -88,10 +85,18 @@ class Creature:
                 m = Motor(l.control_waveform, l.control_amp,  l.control_freq)
                 motors.append(m)
             self.motors = motors 
-        return self.motors
-
+        return self.motors 
+    
     def update_position(self, pos):
         if self.start_position == None:
             self.start_position = pos
         else:
-            self.last_position=pos
+            self.last_position = pos
+
+    def get_distance_travelled(self):
+        if self.start_position is None or self.last_position is None:
+            return 0
+        p1 = np.asarray(self.start_position)
+        p2 = np.asarray(self.last_position)
+        dist = np.linalg.norm(p1-p2)
+        return dist 

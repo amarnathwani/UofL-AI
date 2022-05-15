@@ -37,6 +37,10 @@ class Creature:
         self.flat_links = None
         self.exp_links = None
         self.motors = None
+        self.get_flat_links()
+        self.get_expanded_links()
+        self.start_position = None
+        self.last_position = None
 
     def get_flat_links(self):
         if self.flat_links == None:
@@ -85,3 +89,14 @@ class Creature:
                 motors.append(m)
             self.motors = motors 
         return self.motors
+
+    def update_position(self, pos):
+        if self.start_position == None:
+            self.start_position = pos
+        else:
+            self.last_position=pos
+
+    def get_distance_travelled(self):
+        p1 = np.array(self.start_position)
+        p2 = np.array(self.last_position)
+        return np.linalg.norm(p1-p2)

@@ -18,6 +18,7 @@ p.setRealTimeSimulation(1)
 
 # generate a random creature
 cr = creature.Creature(gene_count=3)
+cr.update_position([0,0,0])
 
 # save it to XML
 with open('test.urdf', 'w') as f:
@@ -41,5 +42,8 @@ while True:
                         jid,  
                         controlMode=mode, 
                         targetVelocity=vel)
+        pos, orn = p.getBasePositionAndOrientation(rob1)
+        cr.update_position(pos)
+        print(cr.get_distance_travelled())
                         
     time.sleep(1.0/240)
