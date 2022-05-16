@@ -109,6 +109,15 @@ class Genome():
         links[0].parent_name = "None"
         return links
 
+    @staticmethod
+    def crossover(g1, g2):
+        xo = np.random.randint(len(g1))
+        if xo > len(g2):
+            xo = len(g2) - 1
+            
+        g3 = np.concatenate((g1[0:xo], g2[xo:]))
+        return g3
+
 class URDFLink:
     def __init__(self, name, parent_name, recur, 
                 link_length=0.1, 
