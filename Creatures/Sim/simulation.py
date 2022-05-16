@@ -53,44 +53,44 @@ class Simulation:
         
 
 
-class ThreadedSim():
-    def __init__(self, pool_size):
-        self.sims = [Simulation(i) for i in range(pool_size)]
+# class ThreadedSim():
+#     def __init__(self, pool_size):
+#         self.sims = [Simulation(i) for i in range(pool_size)]
 
-    @staticmethod
-    def static_run_creature(sim, cr, iterations):
-        sim.run_creature(cr, iterations)
-        return cr
+#     @staticmethod
+#     def static_run_creature(sim, cr, iterations):
+#         sim.run_creature(cr, iterations)
+#         return cr
     
-    def eval_population(self, pop, iterations):
-        """
-        pop is a Population object
-        iterations is frames in pybullet to run for at 240fps
-        """
-        pool_args = [] 
-        start_ind = 0
-        pool_size = len(self.sims)
-        while start_ind < len(pop.creatures):
-            this_pool_args = []
-            for i in range(start_ind, start_ind + pool_size):
-                if i == len(pop.creatures):# the end
-                    break
-                # work out the sim ind
-                sim_ind = i % len(self.sims)
-                this_pool_args.append([
-                            self.sims[sim_ind], 
-                            pop.creatures[i], 
-                            iterations]   
-                )
-            pool_args.append(this_pool_args)
-            start_ind = start_ind + pool_size
+#     def eval_population(self, pop, iterations):
+#         """
+#         pop is a Population object
+#         iterations is frames in pybullet to run for at 240fps
+#         """
+#         pool_args = [] 
+#         start_ind = 0
+#         pool_size = len(self.sims)
+#         while start_ind < len(pop.creatures):
+#             this_pool_args = []
+#             for i in range(start_ind, start_ind + pool_size):
+#                 if i == len(pop.creatures):# the end
+#                     break
+#                 # work out the sim ind
+#                 sim_ind = i % len(self.sims)
+#                 this_pool_args.append([
+#                             self.sims[sim_ind], 
+#                             pop.creatures[i], 
+#                             iterations]   
+#                 )
+#             pool_args.append(this_pool_args)
+#             start_ind = start_ind + pool_size
 
-        new_creatures = []
-        for pool_argset in pool_args:
-            with Pool(pool_size) as po:
-                # it works on a copy of the creatures, so receive them
-                creatures = po.starmap(ThreadedSim.static_run_creature, pool_argset)
-                # and now put those creatures back into the main 
-                # self.creatures array
-                new_creatures.extend(creatures)
-        pop.creatures = new_creatures
+#         new_creatures = []
+#         for pool_argset in pool_args:
+#             with Pool(pool_size) as po:
+#                 # it works on a copy of the creatures, so receive them
+#                 creatures = po.starmap(ThreadedSim.static_run_creature, pool_argset)
+#                 # and now put those creatures back into the main 
+#                 # self.creatures array
+#                 new_creatures.extend(creatures)
+#         pop.creatures = new_creatures
