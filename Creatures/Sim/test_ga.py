@@ -8,11 +8,11 @@ import numpy as np
 class TestGA(unittest.TestCase):
 
     def testGA(self):
-        pop = poplib.Population(pop_size=10, gene_count=3)
+        pop = poplib.Population(pop_size=20, gene_count=4)
         sim = simlib.Simulation()
         # sim = simlib.ThreadedSim(pool_size=8)
         # sim.eval_population(pop, 2400)
-        for generation in range(10):
+        for generation in range(20):
             for cr in pop.creatures:
                 sim.run_creature(cr, 2400)
             fits = [cr.get_distance_travelled() for cr in pop.creatures]

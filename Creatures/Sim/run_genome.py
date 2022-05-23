@@ -19,7 +19,7 @@ p.setRealTimeSimulation(1)
 # generate a random creature
 cr = creature.Creature(gene_count=3)
 
-dna = genlib.Genome.from_csv('9_elite.csv')
+dna = genlib.Genome.from_csv('19_elite.csv')
 cr.set_dna(dna)
 
 # cr.update_position([0,0,0])
