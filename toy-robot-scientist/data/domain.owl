@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://toy-domain#"
+     xml:base="http://toy-domain"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:toy-domain="http://toy-domain#">
+    <owl:Ontology rdf:about="http://toy-domain">
+        <rdfs:label>a toy domain</rdfs:label>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://toy-domain#Aromatic_ring -->
+
+
+    <owl:DatatypeProperty rdf:about="http://toy-domain#Aromatic_ring"/>
+    
+
+
+    <!-- http://toy-domain#Heavy_atom -->
+
+
+    <owl:DatatypeProperty rdf:about="http://toy-domain#Heavy_atom"/>
+    
+
+
+    <!-- http://toy-domain#Hydrogen_acceptor -->
+
+
+    <owl:DatatypeProperty rdf:about="http://toy-domain#Hydrogen_acceptor"/>
+    
+
+
+    <!-- http://toy-domain#Hydrogen_donor -->
+
+
+    <owl:DatatypeProperty rdf:about="http://toy-domain#Hydrogen_donor"/>
+    
+
+
+    <!-- http://toy-domain#Hydrophobicity -->
+
+
+    <owl:DatatypeProperty rdf:about="http://toy-domain#Hydrophobicity"/>
+    
+
+
+    <!-- http://toy-domain#Molecular_weight -->
+
+
+    <owl:DatatypeProperty rdf:about="http://toy-domain#Molecular_weight">
+        <rdfs:domain rdf:resource="http://toy-domain#Chemical_compound"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://toy-domain#Chemical_compound -->
+
+
+    <owl:Class rdf:about="http://toy-domain#Chemical_compound">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://toy-domain#Molecular_weight"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://toy-domain#Chemical_entity -->
+
+
+    <owl:Class rdf:about="http://toy-domain#Chemical_entity">
+        <rdfs:subClassOf rdf:resource="http://toy-domain#Chemical_compound"/>
+        <rdfs:label>Drug</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://toy-domain#Small_molecule -->
+
+
+    <owl:Class rdf:about="http://toy-domain#Small_molecule">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://toy-domain#Chemical_compound"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://toy-domain#Molecular_weight"/>
+                        <owl:someValuesFrom>
+                            <rdfs:Datatype>
+                                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                                <owl:withRestrictions rdf:parseType="Collection">
+                                    <rdf:Description>
+                                        <xsd:maxExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">800</xsd:maxExclusive>
+                                    </rdf:Description>
+                                </owl:withRestrictions>
+                            </rdfs:Datatype>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://toy-domain#Chemical_compound"/>
+    </owl:Class>
+    
+
+
+    <!-- http://toy-domain#Toxin -->
+
+
+    <owl:Class rdf:about="http://toy-domain#Toxin">
+        <rdfs:subClassOf rdf:resource="http://toy-domain#Chemical_compound"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://toy-domain#Curcumine -->
+
+
+    <owl:NamedIndividual rdf:about="http://toy-domain#Curcumine">
+        <rdf:type rdf:resource="http://toy-domain#Chemical_compound"/>
+        <Molecular_weight rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">368</Molecular_weight>
+        <rdfs:comment>derived from turmeric spice</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://toy-domain#Lidocaine -->
+
+
+    <owl:NamedIndividual rdf:about="http://toy-domain#Lidocaine">
+        <rdf:type rdf:resource="http://toy-domain#Chemical_compound"/>
+        <Molecular_weight rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">234</Molecular_weight>
+        <rdfs:comment>anaesthetic discovered by swedes, tested on themselves first, marketed in 1949, still broadly used</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://toy-domain#Maitotoxin -->
+
+
+    <owl:NamedIndividual rdf:about="http://toy-domain#Maitotoxin">
+        <rdf:type rdf:resource="http://toy-domain#Chemical_compound"/>
+        <Molecular_weight rdf:datatype="http://www.w3.org/2001/XMLSchema#int">3380</Molecular_weight>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://toy-domain#Microcysin-LR -->
+
+
+    <owl:NamedIndividual rdf:about="http://toy-domain#Microcysin-LR">
+        <rdf:type rdf:resource="http://toy-domain#Toxin"/>
+        <Molecular_weight rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">995</Molecular_weight>
+        <rdfs:comment>algae bloom toxin</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://toy-domain#Morphine -->
+
+
+    <owl:NamedIndividual rdf:about="http://toy-domain#Morphine">
+        <rdf:type rdf:resource="http://toy-domain#Chemical_entity"/>
+        <Molecular_weight rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">285</Molecular_weight>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://toy-domain#Paclitaxel -->
+
+
+    <owl:NamedIndividual rdf:about="http://toy-domain#Paclitaxel">
+        <rdf:type rdf:resource="http://toy-domain#Chemical_compound"/>
+        <Molecular_weight rdf:datatype="http://www.w3.org/2001/XMLSchema#int">854</Molecular_weight>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://toy-domain#Sildenafil -->
+
+
+    <owl:NamedIndividual rdf:about="http://toy-domain#Sildenafil">
+        <rdf:type rdf:resource="http://toy-domain#Chemical_entity"/>
+        <Molecular_weight rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">475</Molecular_weight>
+        <rdfs:comment>viagra, used for vascular issues too</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://toy-domain#Tetrodotoxin -->
+
+
+    <owl:NamedIndividual rdf:about="http://toy-domain#Tetrodotoxin">
+        <rdf:type rdf:resource="http://toy-domain#Chemical_compound"/>
+        <Molecular_weight rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">319</Molecular_weight>
+        <rdfs:comment>pufferfish poison</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://toy-domain#Tubocurarine -->
+
+
+    <owl:NamedIndividual rdf:about="http://toy-domain#Tubocurarine">
+        <rdf:type rdf:resource="http://toy-domain#Toxin"/>
+        <Molecular_weight rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">610</Molecular_weight>
+        <rdfs:comment>dart poison extracted from vines</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://toy-domain#6-Hydroxytrypargine -->
+
+
+    <owl:NamedIndividual rdf:about="http://toy-domain#6-Hydroxytrypargine">
+        <rdf:type rdf:resource="http://toy-domain#Chemical_compound"/>
+        <Molecular_weight rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">288</Molecular_weight>
+        <rdfs:comment>spider toxin</rdfs:comment>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 5.1.13.2020-01-27T22:08:36Z) https://github.com/owlcs/owlapi/ -->
