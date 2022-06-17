@@ -112,9 +112,17 @@ class Creature:
             self.last_position = pos
 
     def get_distance_travelled(self):
-        # if self.start_position is None or self.last_position is None:
-        #     return 0
-        # p1 = np.asarray(self.start_position)
-        # p2 = np.asarray(self.last_position)
-        # dist = np.linalg.norm(p1-p2)
+        if self.start_position is None or self.last_position is None:
+            return 0
+        p1 = np.asarray(self.start_position)
+        p2 = np.asarray(self.last_position)
+        dist = np.linalg.norm(p1-p2)
         return self.dist 
+
+    def update_dna(self, dna):
+        self.dna = dna
+        self.flat_links = None
+        self.exp_links = None
+        self.motors = None
+        self.start_position = None
+        self.last_position = None

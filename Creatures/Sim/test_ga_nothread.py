@@ -1,19 +1,24 @@
 import unittest
-import population as population
-import simulation as simulation
-import creature as creature
-import genome as genome
+import population
+import simulation 
+import genome 
+import creature 
 import numpy as np
 
 class TestGA(unittest.TestCase):
     def testBasicGA(self):
         pop = population.Population(pop_size=10, 
                                     gene_count=3)
-        sim = simulation.ThreadedSim(pool_size=1)
-        #sim = simulation.Simulation()
+        #sim = simulation.ThreadedSim(pool_size=1)
+        sim = simulation.Simulation()
 
         for iteration in range(1000):
-            sim.eval_population(pop, 2400)
+            # this is a non-threaded version 
+            # where we just call run_creature instead
+            # of eval_population
+            for cr in pop.creatures:
+                sim.run_creature(cr, 2400)            
+            #sim.eval_population(pop, 2400)
             fits = [cr.get_distance_travelled() 
                     for cr in pop.creatures]
             links = [len(cr.get_expanded_links()) 
@@ -49,5 +54,41 @@ class TestGA(unittest.TestCase):
             pop.creatures = new_creatures
                             
         self.assertNotEqual(fits[0], 0)
+
+
+        # pop = poplib.Population(pop_size=20, gene_count=4)
+        # sim = simlib.Simulation()
+        # sim = simlib.ThreadedSim(pool_size=8)
+        # sim.eval_population(pop, 2400)
+        # for generation in range(20):
+        #     for cr in pop.creatures:
+        #         sim.run_creature(cr, 2400)
+        #     fits = [cr.get_distance_travelled() for cr in pop.creatures]
+        #     fitmap = poplib.Population.get_fitness_map(fits)
+
+            # print(generation, np.max(fits), np.mean(fits))
+
+            # fmax = np.max(fits)
+            # for cr in pop.creatures:
+            #     if cr.get_distance_travelled() == fmax:
+            #         elite = cr
+            #         break
+
+            # new_gen = []
+            # for cid in range(len(pop.creatures)):
+            #     p1_ind = poplib.Population.select_parent(fitmap)
+            #     p2_ind = poplib.Population.select_parent(fitmap)
+            #     dna = genlib.Genome.crossover(pop.creatures[p1_ind].dna, pop.creatures[p2_ind].dna)
+            #     dna = genlib.Genome.point_mutate(dna, 0.1, 0.25)
+            #     dna = genlib.Genome.grow_mutate(dna, 0.25)
+            #     dna = genlib.Genome.shrink_mutate(dna, 0.25)
+            #     cr = crlib.Creature(1)
+            #     cr.set_dna(dna)
+            #     new_gen.append(cr)
+
+            # new_gen[0] = elite
+            # csv_filename = str(generation) + '_elite.csv'
+            # genlib.Genome.to_csv(elite.dna, csv_filename)
+            # pop.creatures = new_gen
 
 unittest.main()
